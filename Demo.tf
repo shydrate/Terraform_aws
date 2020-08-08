@@ -54,9 +54,9 @@ resource "aws_instance" "MyFirstInstance"{
     #add ami,instance,tag values to create instance 
     ami = "ami-02354e95b39ca8dec"
     instance_type = "t2.micro"
-    vps_security_group_ids = ["${aws_security_group.allow_ssh.id}"]
+    vpc_security_group_ids = ["${aws_security_group.allow_ssh.id}"]
     subnet_id = "${aws_subnet.PublicSubnet.id}"
-    tag = {
+    tags = {
         Name = "MyEc2Instance"
     }
 
@@ -71,12 +71,12 @@ resource "aws_instance" "MyFirstInstance"{
 #Creating elastic ip and assigning it to instance
 resource "aws_eip" "EipForInstance"{
     instance = "${aws_instance.MyFirstInstance.id}"
-    tag = {
+    tags = {
         Name = "Ec2_instance_ip"
     }
 }
 
 #Output of the elastic ip
 output "my_eip" {
-  value       = "${aws_eip.EipForInstance.publicip}"
+  value = "${aws_eip.EipForInstance.public_ip}"
 }
