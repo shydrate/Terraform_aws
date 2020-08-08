@@ -10,3 +10,6 @@ This repo deals with creating a ec2instance,elastic ip, subnet, vpc using terraf
 6. Now create instance by running `terraform apply` it will ask for approve, type yes. You can bypass it by using `terraform apply --auto-approve`.
 7. Verify all the instance are ceated.
 8. Now to destroy the instance run `terraform destroy --auto-approve`
+
+Screenshots
+![alt text](https://github.com/shydrate/Terraform_aws/blob/master/Screenshots/Instance.png)
