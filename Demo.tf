@@ -36,6 +36,16 @@ resource "aws_security_group" "allow_ssh" {
     depends_on = ["aws_vpc.mainvpc"]
 }
 
+#Creating internet gateway
+resource "aws_internet_gateway" "IGW_TF" {
+  vpc_id = "${aws_vpc.mainvpc.id}"
+
+  tags = {
+    Name = "IGW_TF"
+  }
+  depends_on = ["aws_vpc.mainvpc"]
+}
+
 #Create subnet 
 resource "aws_subnet" "PublicSubnet" {
   vpc_id     = "${aws_vpc.mainvpc.id}"
@@ -71,6 +81,7 @@ resource "aws_instance" "MyFirstInstance"{
 #Creating elastic ip and assigning it to instance
 resource "aws_eip" "EipForInstance"{
     instance = "${aws_instance.MyFirstInstance.id}"
+    vpc      = true
     tags = {
         Name = "Ec2_instance_ip"
     }
